@@ -4,19 +4,24 @@ import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.BindingAdapter
+import data.gov.sg.R
 
 class ActivityUIExt( val context : Context){
     // Build Error dialog.
-    fun buildDialog(error:String , onReload:() -> Unit){
+    fun buildDialog(error:String, title:String=context.getString(R.string.dialog_title),
+                    positiveText:String=context.getString(R.string.dialog_retry),
+                    negativeText:String=context.getString(R.string.dialog_no),
+                    onReload:() -> Unit){
         val builder = AlertDialog.Builder(context)
-        builder.setTitle("Error")
+        builder.setTitle(title)
         builder.setMessage(error)
-        builder.setPositiveButton("Reload"){dialog, which ->
+        builder.setCancelable(false)
+        builder.setPositiveButton(positiveText){dialog, which ->
         onReload.invoke()
             dialog.dismiss()
         }
 
-        builder.setNegativeButton("No"){dialog,which ->
+        builder.setNegativeButton(negativeText){dialog,which ->
             dialog.dismiss()
         }
 

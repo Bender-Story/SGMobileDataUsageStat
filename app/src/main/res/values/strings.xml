@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Data Consumption Stats</string>
+
+    <string name="dialog_retry">Retry</string>
+
+    <string name="dialog_title">Error</string>
+
+    <string name="dialog_no">No</string>
+
+    <string name="network_error">Please check your network</string>
 </resources>

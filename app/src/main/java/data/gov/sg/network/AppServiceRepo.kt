@@ -7,12 +7,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers
 
 class AppServiceRepo{
-    var serviceInterface: ServiceInterface?=null
+    private var serviceInterface: ServiceInterface?=null
     init {
         serviceInterface = NetworkAPIController.getApiClient(NEWS_API_BASE_URL)?.create(ServiceInterface::class.java)
     }
     // gets the DATA from service
-    fun get(resourceId:String, onSuccess: (MobileDataConsumptionModel) -> Unit,
+    fun getMobileDataList(resourceId:String, onSuccess: (MobileDataConsumptionModel) -> Unit,
                      onError: (String) -> Unit){
 
         serviceInterface!!.fetchMobileDataStats(resourceId)
