@@ -1,14 +1,14 @@
 # Singapore Mobile Data Usage Stats APP
 
-This App has been created to show the latest stats of the Mobile data that being used by singapore population for past few years.
+This App has been created to show the latest stats of the Mobile data, that is being used by the singapore population for past few years.
 
-There are two screens in the the App one is the launcher activity while other is the list activity that shows all the data as per the year
+There are two screens in the the App one is the launcher activity, while the other is the list activity that shows all the data as per the year.
 
-This code has been written in Kotlin for Android using Androidx components in MVVM Pattern.
+This code has been written in Kotlin - Android using Androidx components in MVVM Pattern.
 
 This code has the unittests written using junit and Ui test cases written using espresso.
 
-This app also consits of a local database so when ever there is no service available it looks into database and shows the list.
+This app also consits of a local database, so when ever there is no service available it looks into database and shows the list.
 
 The libraries or languages that are used for this project are
 ```
