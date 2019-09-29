@@ -32,5 +32,5 @@ class ActivityUIExt( val context : Context){
 
 @BindingAdapter("visible")
 fun View.visible(visible: Boolean) {
-    this.visibility = if (visible) View.VISIBLE else View.GONE
+    this.visibility = if (visible) View.VISIBLE else View.INVISIBLE
 }

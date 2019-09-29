@@ -7,4 +7,5 @@
     <color name="transparent">@android:color/transparent</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="orange">#FF8C00</color>
 </resources>
