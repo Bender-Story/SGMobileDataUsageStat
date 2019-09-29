@@ -14,8 +14,9 @@ class MobileDataStatListViewModel(application: Application) : AndroidViewModel(a
     val yearlyConsumptionData: MutableLiveData<List<YearlyDataCosumptionRowViewModel>?> = MutableLiveData()
     private val appServiceRepo = AppServiceRepo()
 
-    fun getMobileDataList(onError: (String) -> Unit){
+    fun getMobileDataList(onSuccess: () -> Unit,onError: (String) -> Unit){
       appServiceRepo.getMobileDataList(RESOURCE_ID,{
+          onSuccess.invoke()
            yearlyConsumptionData.postValue( extraRequiredData(it.result.records))
       },{
         onError.invoke(it)

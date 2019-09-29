@@ -2,11 +2,13 @@ package data.gov.sg.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import data.gov.sg.R
 import data.gov.sg.components.ActivityUIExt
+import data.gov.sg.components.visible
 import data.gov.sg.viewmodels.MobileDataStatListViewModel
 import data.gov.sg.viewmodels.YearlyDataCosumptionRowViewModel
 import kotlinx.android.synthetic.main.activity_mobile_data_stat_list.*
@@ -22,11 +24,14 @@ class MobileDataStatListActivity : AppCompatActivity() {
     }
 
     private fun fetchData(){
-        viewModel?.getMobileDataList {
-            ActivityUIExt(this).buildDialog(it){
+        progressbar.visibility=View.VISIBLE
+        viewModel?.getMobileDataList (
+            {progressbar.visibility=View.GONE},
+            { ActivityUIExt(this).buildDialog(it){
+                progressbar.visibility=View.GONE
                 fetchData()
             }
-        }
+        })
     }
 
     // Observers th mutable list to update recycler view

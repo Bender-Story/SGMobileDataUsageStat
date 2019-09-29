@@ -28,7 +28,7 @@ class LauncherActivity : AppCompatActivity() {
     private fun callNextActivity(){
         Handler().postDelayed({
            checkIfNetworkAvailable()
-        }, 5000)
+        }, 1000)
     }
 
     private fun checkIfNetworkAvailable(){
