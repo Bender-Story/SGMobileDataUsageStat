@@ -11,7 +11,8 @@ class ActivityUIExt( val context : Context){
     fun buildDialog(error:String, title:String=context.getString(R.string.dialog_title),
                     positiveText:String=context.getString(R.string.dialog_retry),
                     negativeText:String=context.getString(R.string.dialog_no),
-                    onReload:() -> Unit){
+                    onReload:() -> Unit,
+                    onNegitive:()->Unit){
         val builder = AlertDialog.Builder(context)
         builder.setTitle(title)
         builder.setMessage(error)
@@ -22,6 +23,7 @@ class ActivityUIExt( val context : Context){
         }
 
         builder.setNegativeButton(negativeText){dialog,which ->
+            onNegitive.invoke()
             dialog.dismiss()
         }
 

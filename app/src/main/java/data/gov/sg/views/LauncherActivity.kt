@@ -8,6 +8,7 @@ import data.gov.sg.components.ActivityUIExt
 import data.gov.sg.utils.NetworkUtils
 import kotlinx.android.synthetic.main.launcher_activity.*
 import android.os.Handler
+import data.gov.sg.Constants.GO_OFFLINE
 
 
 class LauncherActivity : AppCompatActivity() {
@@ -33,12 +34,16 @@ class LauncherActivity : AppCompatActivity() {
 
     private fun checkIfNetworkAvailable(){
         if(NetworkUtils.isNetworkAvailable(this)){
-            Navigator.goToActivity(this, MobileDataStatListActivity::class.java)
-            finish()
+            Navigator.goToActivity(this, MobileDataStatListActivity::class.java,true)
+
         }else{
-            ActivityUIExt(this).buildDialog(getString(R.string.network_error)){
+            ActivityUIExt(this).buildDialog(getString(R.string.network_error),negativeText="Go offline",onReload={
                 checkIfNetworkAvailable()
-            }
+            },onNegitive={
+                var bundle=Bundle()
+                bundle.putBoolean(GO_OFFLINE,true)
+                Navigator.goToActivity(this, MobileDataStatListActivity::class.java,true,bundle)
+            })
         }
     }
 

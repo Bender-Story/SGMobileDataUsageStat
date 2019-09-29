@@ -8,4 +8,6 @@
     <string name="dialog_no">No</string>
 
     <string name="network_error">Please check your network</string>
+    <string name="no_data">No Data Available</string>
+
 </resources>

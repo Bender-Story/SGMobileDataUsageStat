@@ -5,7 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import data.gov.sg.Constants.RESOURCE_ID
 import data.gov.sg.data.Record
-import data.gov.sg.data.YearlyConsumptionModel
+import data.gov.sg.data.YearlyData
+import data.gov.sg.database.AppDatabase
 import data.gov.sg.network.AppServiceRepo
 import data.gov.sg.utils.toFormatDouble
 
@@ -21,6 +22,21 @@ class MobileDataStatListViewModel(application: Application) : AndroidViewModel(a
       },{
         onError.invoke(it)
       })
+    }
+
+    fun addDataToLocalDatabase(db: AppDatabase?){
+        db?.yearlyDataDao()?.deleteAll()
+        yearlyConsumptionData.value?.forEach {
+            db?.yearlyDataDao()?.insertAll(it.data)
+        }
+    }
+
+    fun getDataFromLocalDataBase(db: AppDatabase?){
+        var data=db?.yearlyDataDao()?.getAll()
+       var viewModelData= data?.map {
+            YearlyDataCosumptionRowViewModel(it){}
+        }
+        yearlyConsumptionData.postValue(viewModelData)
     }
 
     fun extraRequiredData(records: List<Record>) :List<YearlyDataCosumptionRowViewModel>{
@@ -41,7 +57,7 @@ class MobileDataStatListViewModel(application: Application) : AndroidViewModel(a
 
            }
 
-            YearlyDataCosumptionRowViewModel(YearlyConsumptionModel(records.key,total,decrease)){}
+            YearlyDataCosumptionRowViewModel(YearlyData(records.key,total,decrease)){}
          }
     }
 }
