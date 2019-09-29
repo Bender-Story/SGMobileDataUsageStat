@@ -3,6 +3,7 @@ package data.gov.sg.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import data.gov.sg.Constants.RESOURCE_ID
 import data.gov.sg.data.Record
 import data.gov.sg.data.YearlyData
@@ -10,7 +11,7 @@ import data.gov.sg.database.AppDatabase
 import data.gov.sg.network.AppServiceRepo
 import data.gov.sg.utils.toFormatDouble
 
-class MobileDataStatListViewModel(application: Application) : AndroidViewModel(application) {
+class MobileDataStatListViewModel: ViewModel() {
     // related movies list.
     val yearlyConsumptionData: MutableLiveData<List<YearlyDataCosumptionRowViewModel>?> = MutableLiveData()
     private val appServiceRepo = AppServiceRepo()
@@ -49,8 +50,8 @@ class MobileDataStatListViewModel(application: Application) : AndroidViewModel(a
             var decrease=false
            list.forEachIndexed { index, record ->
                if(list.size>index+1) {
-                   decrease = list[index].volume_of_mobile_data.toDouble() >
-                           list[index + 1].volume_of_mobile_data.toDouble()
+                   decrease = (list[index].volume_of_mobile_data.toDouble() >
+                           list[index + 1].volume_of_mobile_data.toDouble())|| decrease
 
                    if (decrease) return@forEachIndexed
                }
